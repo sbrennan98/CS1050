@@ -5,7 +5,7 @@
  *	CS1050 HW1:	Rental Car Billing
  */
 #include <stdio.h>
-
+//This program is extremely DRY and needs optimization 
 int interpedia();
 int hurts();
 int mavis();

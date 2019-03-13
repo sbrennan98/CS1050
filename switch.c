@@ -6,19 +6,17 @@
  */
 #include <stdio.h>
 #define TAX 8
-
+//optimized version of homework 1
 int interpedia();
 int hurts();
 int mavis();
 int international();
 
+//global variables needed to exist outside of functions. Global variables automatically initialized to 0 in C
 int rtotal, rtax, rsubt;
 
 int main(void)
 {
-	rtotal = 0;
-	rsubt = 0;
-	rtax = 0;
 	printf("Hello! Welcome to the Interpedia billing calculator.\n");
 	interpedia();
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\nGrand Total: $%d\nThank you for using the Interpedia billing calculator!\n\n", (rtotal));
