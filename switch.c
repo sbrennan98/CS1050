@@ -6,11 +6,13 @@
  */
 #include <stdio.h>
 #define TAX 8
+#define TYPE 6
 //optimized version of homework 1
 int interpedia();
 int hurts();
 int mavis();
 int international();
+int function(int econ, int mid, int full, int lux, int suv, int mini);
 
 //global variables needed to exist outside of functions. Global variables automatically initialized to 0 in C
 int rtotal, rtax, rsubt;
@@ -39,37 +41,46 @@ int interpedia()
 	switch (company)
 	{
 		case 1:
+			int econ=24, mid=31, full=64, lux=97, suv=75, mini=79;
 			printf("You've selected Hurts.\n");
-			hurts();
+			hurts(econ, mid, full, lux, suv, mini);
 			break;
 
 		case 2:
-			mavis();
+			int econ=24, mid=24, full=65, lux=98, suv=50, mini=77;
+			printf("You've selected Mavis.\n");
+			mavis(econ, mid, full, lux, suv, mini);
 			break;
 
 		case 3:
-			international();
+			int econ=28, mid=30, full=67, lux=89, suv=50, mini=75;
+			printf("You've selected International.\n");
+			international(econ, mid, full, lux, suv, mini);
 			break;
 	}
 	return 0;
 }
 
-//Hurts Function
-int hurts()
+//Better function:
+int function(int econ, int mid, int full, int lux, int suv, int mini)
 {
-	int type=0, days=0;
+	int choice=0, days=0, subt=0, total=0, tax=0;
 	char loop='n';
-	int econ=24, mid=31, full=64, lux=97, suv=75, mini=79;
-	int subt=0, total=0,  tax=0;
+	int type[TYPE];
+//initialize the array
+	for (i=0; i <= TYPE; i++)
+	{
+		type[i]=i+1;
+	}
 
 	printf("Please enter the number that corresponds with the type of car you prefer:\n(1)Economy\n(2)Mid-Size\n(3)Full-Size\n(4)Luxury\n(5)SUV\n(6)Minivan\n");
-	scanf("%d", &type);
-	while ( (type != 1) && (type != 2) && (type != 3) && (type != 4) && (type != 5) && (type != 6) )
+	scanf("%d", &choice);
+	while ( (choice < TYPE) || (choice > TYPE))
 	{
 		printf("Please enter a valid number.\n");
 		scanf("%d", &type);
 	}
-
+	
 	if (type == 1)
 	{
 		printf("\nYou've selected Economy.\nPlease enter how many days you'd like to rent the vehicle.\n");
@@ -245,6 +256,25 @@ int hurts()
 		return 0;
 	}
 	return 0;
+	}
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+//Hurts Function
+int hurts()
+{
+
 }
 
 //Mavis Function
