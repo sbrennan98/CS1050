@@ -5,12 +5,15 @@
  * CS1050 HW2:	Mizzou Accomodations Reservation System
  *******************************************************/
 #include <stdio.h>
+#define BONUS
 #define COUNTHOTELS 6
 #define COUNTROOMTYPES 5
 #define STRINGMAX 64
 #define LOWEST 118
 
-//Global Variables
+enum HOTEL {Marriott, Hilton, BestWestern, HolidayInn, Motel6, Super8};
+enum ROOM {StandardKing, Standard2Queen, QueenSuite, KingSuite, PresidentialSuite};
+
 const char hotelNames[COUNTHOTELS][STRINGMAX] = {"Marriott", "Hilton", "Best Western", "Holiday Inn", "Motel 6", "Super 8"};
 const char roomNames[COUNTROOMTYPES][STRINGMAX] = {"Standard King", "Standard Two Queens", "Suite Two Queens", "Suite King", "Suite Presidential"};
 int costMatrix[COUNTHOTELS][COUNTROOMTYPES]=
@@ -23,11 +26,22 @@ int costMatrix[COUNTHOTELS][COUNTROOMTYPES]=
 	{118,118,240,247,389},	// Super 8
 };
 
-//Prototypes
-void PrintHotelRoomsByHotel(int hotel);
-void PrintHotelsByRoom(int room);
+
+// GetHotelName - Given a hotel value, return a printable string
+const char * const GetHotelName(enum HOTEL hotel);
+// GetRoomName - Given a room value, return a printable string
+const char * const GetRoomName(enum ROOM room);
+GetRoomPrice - Returns the price of a room at a particular hotel
+int GetRoomPrice(enum HOTEL hotel, enum ROOM room);
+// PrintHotelRoomsByHotel - Print rooms and prices at a given hotel
+void PrintHotelRoomsByHotel(enum HOTEL hotel);
+// PrintHotelsByRoom - Print hotels and prices for a given room type
+void PrintHotelsByRoom(enum ROOM room);
+// PrintHotelOptions - Prints a numbered list of hotels
 void PrintHotelOptions();
+// PrintRoomOptions - Prints a numbered list of room types
 void PrintRoomOptions();
+// PrintHotelRoomsLessThan - Prints rooms at all hotels that are priced less than some limit
 void PrintHotelRoomsLessThan(int iLimit);
 int getMainMenuChoice();
 int askLimit();
@@ -42,7 +56,7 @@ int main(void)
 }
 int getMainMenuChoice()
 {
-	int menuchoice, hotel, room;
+	int menuchoice, hotelchoice, roomchoice;
 	printf("Main Menu:\n(1)Display by Hotel\n(2)Display by Room Type\n(3)Display by Price Limit\n(4)Exit Program\n\nPlease make a selection:\n");
 	scanf("%d", &menuchoice);
 	while ((menuchoice<1)||(menuchoice>4))
@@ -53,22 +67,21 @@ int getMainMenuChoice()
 	switch (menuchoice)
 	{
 		case 1: PrintHotelOptions();
-			scanf("%d", &hotel);
-			while ((hotel<1)||(hotel>COUNTHOTELS))
+			scanf("%d", &hotelchoice);
+			while ((hotelchoice<1)||(hotelchoice>COUNTHOTELS))
 			{
 				printf("*Error*: Please enter a valid number.\n");
-				scanf("%d", &hotel);
+				scanf("%d", &hotelchoice);
 			}
-			PrintHotelRoomsByHotel(hotel);
+			PrintHotelRoomsByHotel();
 			break;
 		case 2: PrintRoomOptions();
-			scanf("%d", &room);
-			while ((room<1)||(room>COUNTROOMTYPES))
+			scanf("%d", &roomchoice);
+			while ((roomchoice<1)||(roomchoice>COUNTROOMTYPES))
 			{
 				printf("*Error*: Please enter a valid number.\n");
-				scanf("%d", &room);
+				scanf("%d", &roomchoice);
 			}
-			PrintHotelsByRoom(room);
 			break;
 		case 3: askLimit();
 			break;
@@ -104,42 +117,40 @@ int askLimit()
 	scanf("%d", &iLimit);
 	if (iLimit<LOWEST)
 	{
-		printf("I'm sorry, we do not offer any rooms less than or equal to $%d. Going back to main menu...\n\n", iLimit);
+		printf("I'm sorry, we do not offer any rooms less than or equal to $%d. Going back to main menu...\n", iLimit);
 		getMainMenuChoice();
 	}
 	PrintHotelRoomsLessThan(iLimit);
 	return 0;
 }
-void PrintHotelRoomsByHotel(int hotel)
+void PrintHotelRoomsByHotel(enum HOTEL hotel)
 {
-	int i;
-	printf("\nRooms at %s:\n", hotelNames[hotel-1]);
-	for (i=0; i<COUNTROOMTYPES; i++)
-	{
-		printf("%s - $%d\n", roomNames[i], costMatrix[hotel-1][i]);
-	}
+	printf("\nRooms at %s:\n");
 }
-void PrintHotelsByRoom(int room)
+void PrintHotelsByRoom(enum ROOM room)
 {
-	int i;
-	printf("\nHotels with %s:\n", roomNames[room-1]);
-	for (i=0; i<COUNTHOTELS; i++)
-	{
-		printf("%s: %s-$%d\n", hotelNames[i], roomNames[room-1], costMatrix[room-1][i]);
-	}
+	printf("\nHotels with %s:\n");
 }
 void PrintHotelRoomsLessThan(int iLimit)
 {
-	int i, j;
-	printf("Rooms less than or equal to $%d:\n", iLimit);
+	printf("Rooms less than $%d:\n", iLimit);
+}
+int GetRoomPrice(enum HOTEL hotel, enum ROOM room)
+{
+
+	return 0;
+}
+const char GetHotelName(enum HOTEL hotel)
+{
+	printf("")
+	return 0;
+}
+const char GetRoomName(enum ROOM room)
+{
+	int i;
 	for (i=0; i<COUNTHOTELS; i++)
 	{
-		for (j=0; j<COUNTROOMTYPES; i++)
-		{
-			if ((costMatrix[i][j]<=iLimit)&&(costMatrix[i][j]>0))
-			{
-				printf("%s: %s-$%d\n", hotelNames[i], roomNames[j], costMatrix[i][j]);
-			}
-		}
+
 	}
+	return 0;
 }
