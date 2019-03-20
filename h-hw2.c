@@ -72,8 +72,7 @@ int getMainMenuChoice()
 			break;
 		case 3: askLimit();
 			break;
-		case 4: return 0;
-			break;
+		default: return 0;
 	}
 	return 0;
 }
@@ -107,7 +106,7 @@ int askLimit()
 		printf("I'm sorry, we do not offer any rooms less than or equal to $%d. Going back to main menu...\n\n", iLimit);
 		getMainMenuChoice();
 	}
-	PrintHotelRoomsLessThan(iLimit);
+	else PrintHotelRoomsLessThan(iLimit);
 	return 0;
 }
 void PrintHotelRoomsByHotel(int hotel)
@@ -125,7 +124,7 @@ void PrintHotelsByRoom(int room)
 	printf("\nHotels with %s:\n", roomNames[room-1]);
 	for (i=0; i<COUNTHOTELS; i++)
 	{
-		printf("%s: %s-$%d\n", hotelNames[i], roomNames[room-1], costMatrix[room-1][i]);
+		printf("%s: %s-$%d\n", hotelNames[i], roomNames[room-1], costMatrix[i][room-1]);
 	}
 }
 void PrintHotelRoomsLessThan(int iLimit)
@@ -134,9 +133,9 @@ void PrintHotelRoomsLessThan(int iLimit)
 	printf("Rooms less than or equal to $%d:\n", iLimit);
 	for (i=0; i<COUNTHOTELS; i++)
 	{
-		for (j=0; j<COUNTROOMTYPES; i++)
+		for (j=0; j<COUNTROOMTYPES; j++)
 		{
-			if ((costMatrix[i][j]<=iLimit)&&(costMatrix[i][j]>0))
+			if (costMatrix[i][j]<=iLimit)
 			{
 				printf("%s: %s-$%d\n", hotelNames[i], roomNames[j], costMatrix[i][j]);
 			}
