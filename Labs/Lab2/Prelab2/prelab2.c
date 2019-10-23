@@ -1,11 +1,6 @@
-/*
- *
- *
- */
-
 #include <stdio.h>
 
-int absolute(int);
+//int absolute(int);
 
 int main(void)
 {
@@ -22,15 +17,16 @@ scanf("%d", &integer2);
 printf("Please enter the third integer.\n");
 scanf("%d", &integer3);
 
-/* Easy but inefficient:
-if (integer1 < 0)
-  integer1=integer1*-1;
-if (integer2 < 0)
-  integer2=integer2*-1;
-if (integer3 < 0)
-  integer3=integer3*-1;
-*/
-
+/*
+ *	if (integer1 < 0)
+ * 	integer1=integer1*-1;
+ *
+ *	if (integer2 < 0)
+ *	integer2=integer2*-1;
+ *	
+ *	if (integer3 < 0)
+ * 	integer3=integer3*-1;
+ */
 printf("Here's the absolute values:\n");
 printf("%d\n", absolute(integer1));
 //printf("%d\n", integer2);
